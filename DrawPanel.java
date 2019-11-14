@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.text.Position;
 
 /**
  * Panel in which drawing occurs.
@@ -61,33 +62,42 @@ public class DrawPanel extends JPanel
             // Remember this starting coordinate (look at documentation for mouse events)
             // You can store these in x0 and y0
             // TODO
+        	Point initialMousePos = new Point(e.getPoint());
+        	
 
             // are we in edit mode?
             if (frame.isEditing())
             {
                 // create point where the mouse was clicked
                 // TODO
-
+            	
                 // find which shape was clicked
+            	
+            	
                 // loop through shapes in stack fashion, LIFO
                 // TODO
-                for (// TODO: loop through shape list)
-                {
-                    if (// TODO: check if point in shape)
+                for (Shape shape : shapeList)
+                {	
+                    if (shape.contains(initialMousePos))
                     {
                         // if the shape contains the point, set the shapeIndex
                         // to be the index in the shapeList
-                        shapeIndex = i;
+                       
 
                         // TODO: find if the shape is filled
+                        boolean isFilled = shape.isFilled();
                         // TODO: set fillBox to match the status of the shape
-
+                       
+                        frame.getControlPanel().fillBox.setSelected(isFilled);
                         // TODO: get color of the shape
+                        Color color = shape.getColor();
                         // TODO: set the color of the frame to match the shape's color
-                        
+                        frame.getControlPanel().color = color;
                         // TODO: break out of the for loop
+                        break;
                         
                     }
+                
                 }
             }
             else if (frame.isDeleting()) // are we in delete mode?
@@ -96,9 +106,9 @@ public class DrawPanel extends JPanel
                 
                 // find which shape was clicked
                 // loop through shapes in stack fashion, LIFO
-                for (//TODO)
+                for (Shape shape : shapeList)
                 {
-                    if (//TODO)
+                    if (shape.contains(initialMousePos))
                     {
                         // If the shape contains the point, prompt the user for
                         // a confirmation to delete
@@ -108,15 +118,20 @@ public class DrawPanel extends JPanel
                                         "Delete chosen shape?", "",
                                         JOptionPane.YES_NO_OPTION);
                         // TODO: Check answer, remove shape if yes 
+                        if (ret == 1) {
+                        	
+                        }
                         // You may need to review JOptionPane documentation
 
                         // TODO: break out of for loop
+                        break;
                     }
                 }
             }
             else // we're drawing a shape
             {
                 // TODO: Indicate that drawing of a shape has begun (look at what flags may be set)
+            	
             }
         }
 
