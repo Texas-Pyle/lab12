@@ -171,10 +171,10 @@ public class DrawPanel extends JPanel
             	drawingFlag = false;
                 // We no longer need a temporary shape (set to null)
                 // TODO
-            	
+            	tempShape = null;
                 // Create the shape given the current state
                 // TODO
-
+            	MyPolygon newShape = new MyPolygon(frame.getColor(),frame.isFilled());
                 // Add the shape to the panel list if the shape exists
                 // TODO
                 
