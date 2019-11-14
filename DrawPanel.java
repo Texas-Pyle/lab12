@@ -6,8 +6,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonModel;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.Border;
 import javax.swing.text.Position;
 
@@ -131,6 +134,17 @@ public class DrawPanel extends JPanel
             else // we're drawing a shape
             {
                 // TODO: Indicate that drawing of a shape has begun (look at what flags may be set)
+            	drawingFlag = true;
+            	if(frame.isOval()) {
+            		tempShape = new Oval(initialMousePos,0,0,frame.getColor(),frame.isFilled());
+            	}else if (frame.isRectangle()) {
+            		tempShape = new Rectangle(initialMousePos,0,0,frame.getColor(),frame.isFilled());
+            	}else if(frame.isDiamond()) {
+            		tempShape = new Diamond(initialMousePos,0,0,frame.getColor(),frame.isFilled());
+            	}else {
+            		tempShape = new RightTriangle(initialMousePos,0,0,frame.getColor(),frame.isFilled());
+            	}
+            	
             	
             }
         }
@@ -150,13 +164,14 @@ public class DrawPanel extends JPanel
 
                 // Coordinates of the cursor (x0/y0 are already being used, what should you use?)
                 // TODO
+            	Point finalMousePos = new Point(e.getLocationOnScreen());
 
                 // Indicate that we are no longer drawing
                 // TODO
-
+            	drawingFlag = false;
                 // We no longer need a temporary shape (set to null)
                 // TODO
-
+            	
                 // Create the shape given the current state
                 // TODO
 
