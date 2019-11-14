@@ -456,8 +456,7 @@ public class DrawFrame extends JFrame
     public boolean isOval()
     {
         // TODO: implement this => check info on the correct graphical component.
-    	ControlPanel cp = new ControlPanel();
-    	return cp.ovalButton.isSelected();
+    	return this.controlPanel.ovalButton.isSelected();
     	
     	
     }
@@ -470,8 +469,8 @@ public class DrawFrame extends JFrame
     public boolean isRectangle()
     {
         // TODO: implement this => check info on the correct graphical component.
-    	ControlPanel cp = new ControlPanel();
-    	return cp.rectangleButton.isSelected();
+    
+    	return this.controlPanel.rectangleButton.isSelected();
     }
 
     /**
@@ -482,8 +481,8 @@ public class DrawFrame extends JFrame
     public boolean isTriangle()
     {
         // TODO: implement this => check info on the correct graphical component.
-    	ControlPanel cp = new ControlPanel();
-    	return cp.triangleButton.isSelected();
+    	
+    	return this.controlPanel.triangleButton.isSelected();
     }
 
     /**
@@ -494,8 +493,8 @@ public class DrawFrame extends JFrame
     public boolean isDiamond()
     {
         // TODO: implement this => check info on the correct graphical component.
-    	ControlPanel cp = new ControlPanel();
-    	return cp.diamondButton.isSelected();
+    	
+    	return this.controlPanel.diamondButton.isSelected();
     }
 
     /**
@@ -506,8 +505,8 @@ public class DrawFrame extends JFrame
     public boolean isFilled()
     {
         // TODO: implement this => check info on the correct graphical component.
-    	ControlPanel cp = new ControlPanel();
-    	return cp.fillBox.isSelected();
+    	
+    	return this.controlPanel.fillBox.isSelected();
     }
 
     /**
