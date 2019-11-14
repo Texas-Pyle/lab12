@@ -11,6 +11,7 @@ import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout.Group;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
@@ -371,6 +372,7 @@ public class DrawFrame extends JFrame
                     if (randShapeChoice == 0) // Diamond
                     {
                         // TODO: create a diamond with the random values and add it to the drawpanel.
+                    	
                     }
                     else if (randShapeChoice == 1) // Rectangle
                     {
@@ -454,6 +456,10 @@ public class DrawFrame extends JFrame
     public boolean isOval()
     {
         // TODO: implement this => check info on the correct graphical component.
+    	ControlPanel cp = new ControlPanel();
+    	return cp.ovalButton.isSelected();
+    	
+    	
     }
 
     /**
@@ -464,6 +470,8 @@ public class DrawFrame extends JFrame
     public boolean isRectangle()
     {
         // TODO: implement this => check info on the correct graphical component.
+    	ControlPanel cp = new ControlPanel();
+    	return cp.rectangleButton.isSelected();
     }
 
     /**
@@ -474,6 +482,8 @@ public class DrawFrame extends JFrame
     public boolean isTriangle()
     {
         // TODO: implement this => check info on the correct graphical component.
+    	ControlPanel cp = new ControlPanel();
+    	return cp.triangleButton.isSelected();
     }
 
     /**
@@ -484,6 +494,8 @@ public class DrawFrame extends JFrame
     public boolean isDiamond()
     {
         // TODO: implement this => check info on the correct graphical component.
+    	ControlPanel cp = new ControlPanel();
+    	return cp.diamondButton.isSelected();
     }
 
     /**
@@ -494,6 +506,8 @@ public class DrawFrame extends JFrame
     public boolean isFilled()
     {
         // TODO: implement this => check info on the correct graphical component.
+    	ControlPanel cp = new ControlPanel();
+    	return cp.fillBox.isSelected();
     }
 
     /**
