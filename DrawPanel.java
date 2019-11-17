@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Panel;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -66,7 +68,8 @@ public class DrawPanel extends JPanel
             // You can store these in x0 and y0
             // TODO
         	Point initialMousePos = new Point(e.getPoint());
-        	
+        	x0 = initialMousePos.x;
+        	y0 = initialMousePos.y;
 
             // are we in edit mode?
             if (frame.isEditing())
@@ -156,7 +159,9 @@ public class DrawPanel extends JPanel
          */
         @Override
         public void mouseReleased(MouseEvent e)
-        {
+        {Point finalMousePos = new Point(e.getLocationOnScreen());
+        	x1 = finalMousePos.x;
+        	y1 = finalMousePos.y;
             // Are we currently drawing?
             if (drawingFlag)
             {
@@ -164,7 +169,7 @@ public class DrawPanel extends JPanel
 
                 // Coordinates of the cursor (x0/y0 are already being used, what should you use?)
                 // TODO
-            	Point finalMousePos = new Point(e.getLocationOnScreen());
+            	
 
                 // Indicate that we are no longer drawing
                 // TODO
@@ -174,8 +179,9 @@ public class DrawPanel extends JPanel
             	tempShape = null;
                 // Create the shape given the current state
                 // TODO
-            	MyPolygon newShape = new MyPolygon(frame.getColor(),frame.isFilled());
+            	
                 // Add the shape to the panel list if the shape exists
+            	addShape(createShape());
                 // TODO
                 
                 //repaint
@@ -221,12 +227,13 @@ public class DrawPanel extends JPanel
             int ydist = y1 - y0;
             int width = xdist*2; // Width/height are twice the distance from ovals, rectangles, and diamonds.
             int height = ydist*2;
-
+            Point center = new Point(x0,y0);
             // Create a new object, depending on what is selected
             // TODO give them diamond, comments else
             if (frame.isOval())
             {
-                // TODO: create and return an Oval
+                Shape newShape = new Oval(center, xdist, ydist, frame.getColor(), frame.isFilled());
+                return newShape;
                 
             }
             else if (frame.isRectangle())
@@ -298,9 +305,12 @@ public class DrawPanel extends JPanel
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(frame.getColor());
         // TODO: Draw each shape on the list
-        
+        for (int i = 0; i < shapeList.size(); ++i) {
+        	shapeList.get(i).draw(g2d);
+        }
         // TODO: If there is a temporary shape, then draw it, too
         
     }
