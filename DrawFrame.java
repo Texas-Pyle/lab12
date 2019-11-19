@@ -181,7 +181,7 @@ public class DrawFrame extends JFrame
 
             // Add action listener to fill box for editing
             fillBox.addActionListener(new ActionListener()
-            {
+            { 
 
                 @Override
                 public void actionPerformed(ActionEvent e)
@@ -325,7 +325,7 @@ public class DrawFrame extends JFrame
                         ovalButton.setEnabled(true);
                         rectangleButton.setEnabled(true);
                         triangleButton.setEnabled(true);
-                        diamondButton.setEnabled(true);
+                        diamondButton.setEnabled(true); 
                         randomButton.setEnabled(true);
 
                         // Indicate that edit mode has been deactivated

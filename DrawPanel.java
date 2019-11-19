@@ -82,28 +82,30 @@ public class DrawPanel extends JPanel
             	
                 // loop through shapes in stack fashion, LIFO
                 // TODO
-                for (Shape shape : shapeList)
+            	int index = 0;
+            	for (Shape shape : shapeList)
                 {	
                     if (shape.contains(initialMousePos))
                     {
                         // if the shape contains the point, set the shapeIndex
                         // to be the index in the shapeList
-                       
+                    	shapeIndex = index;
 
                         // TODO: find if the shape is filled
-                        boolean isFilled = shape.isFilled();
+                        boolean isFilled = shape.isFilled(); 
                         // TODO: set fillBox to match the status of the shape
+                       frame.controlPanel.fillBox.setSelected(isFilled);
                        
-                        frame.getControlPanel().fillBox.setSelected(isFilled);
                         // TODO: get color of the shape
                         Color color = shape.getColor();
                         // TODO: set the color of the frame to match the shape's color
-                        frame.getControlPanel().color = color;
+                        frame.controlPanel.color = color;
                         // TODO: break out of the for loop
+                      
                         break;
                         
                     }
-                
+                    index++;
                 }
             }
             else if (frame.isDeleting()) // are we in delete mode?
@@ -112,6 +114,7 @@ public class DrawPanel extends JPanel
                 
                 // find which shape was clicked
                 // loop through shapes in stack fashion, LIFO
+            	int index = 0;
                 for (Shape shape : shapeList)
                 {
                     if (shape.contains(initialMousePos))
@@ -124,29 +127,21 @@ public class DrawPanel extends JPanel
                                         "Delete chosen shape?", "",
                                         JOptionPane.YES_NO_OPTION);
                         // TODO: Check answer, remove shape if yes 
-                        if (ret == 1) {
-                        	
+                        if (ret == 0) {
+                        	removeShape(index);
                         }
                         // You may need to review JOptionPane documentation
 
                         // TODO: break out of for loop
                         break;
                     }
+                    index ++;
                 }
             }
             else // we're drawing a shape
             {
                 // TODO: Indicate that drawing of a shape has begun (look at what flags may be set)
             	drawingFlag = true;
-            	if(frame.isOval()) {
-            		tempShape = new Oval(initialMousePos,0,0,frame.getColor(),frame.isFilled());
-            	}else if (frame.isRectangle()) {
-            		tempShape = new Rectangle(initialMousePos,0,0,frame.getColor(),frame.isFilled());
-            	}else if(frame.isDiamond()) {
-            		tempShape = new Diamond(initialMousePos,0,0,frame.getColor(),frame.isFilled());
-            	}else {
-            		tempShape = new RightTriangle(initialMousePos,0,0,frame.getColor(),frame.isFilled());
-            	}
             	
             	
             }
@@ -159,7 +154,7 @@ public class DrawPanel extends JPanel
          */
         @Override
         public void mouseReleased(MouseEvent e)
-        {Point finalMousePos = new Point(e.getLocationOnScreen());
+        {Point finalMousePos = new Point(e.getPoint());
         	x1 = finalMousePos.x;
         	y1 = finalMousePos.y;
             // Are we currently drawing?
@@ -205,9 +200,12 @@ public class DrawPanel extends JPanel
                 // Yes
                 // Note the current coordinates
                 // TODO
+            	x1 = e.getPoint().x;
+            	y1 = e.getPoint().y;
 
                 // Create a temporary shape (look at what variables we have)
                 // TODO
+            	tempShape = createShape();
 
                 // repaint
                 repaint();
@@ -230,25 +228,30 @@ public class DrawPanel extends JPanel
             Point center = new Point(x0,y0);
             // Create a new object, depending on what is selected
             // TODO give them diamond, comments else
+            
             if (frame.isOval())
             {
-                Shape newShape = new Oval(center, xdist, ydist, frame.getColor(), frame.isFilled());
+                Shape newShape = new Oval(center, width, height, frame.getColor(), frame.isFilled());
                 return newShape;
                 
             }
             else if (frame.isRectangle())
             {
                 // TODO: create and return a Rectangle
+            	return  new Rectangle(center,width,height,frame.getColor(),frame.isFilled());
                 
             }
             else if (frame.isTriangle())
             {
                 // TODO: create and return a Triangle
+            	return new RightTriangle(center,width,height,frame.getColor(),frame.isFilled());
                 
             }
             else if (frame.isDiamond())
             {
                 // TODO: create and return diamond
+            	return new Diamond(center,width,height,frame.getColor(),frame.isFilled());
+            	
                 
             }
             // Should not get here, but be safe
@@ -306,10 +309,14 @@ public class DrawPanel extends JPanel
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(frame.getColor());
+        
         // TODO: Draw each shape on the list
         for (int i = 0; i < shapeList.size(); ++i) {
         	shapeList.get(i).draw(g2d);
+        	
+        }
+        if (tempShape != null) {
+        	tempShape.draw(g2d);
         }
         // TODO: If there is a temporary shape, then draw it, too
         
