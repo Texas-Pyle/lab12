@@ -99,7 +99,7 @@ public class DrawPanel extends JPanel
                         // TODO: get color of the shape
                         Color color = shape.getColor();
                         // TODO: set the color of the frame to match the shape's color
-                        frame.controlPanel.color = color;
+                        frame.controlPanel.colorChooser.setBackground(color);
                         // TODO: break out of the for loop
                       
                         break;

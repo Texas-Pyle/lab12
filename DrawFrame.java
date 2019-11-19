@@ -218,17 +218,22 @@ public class DrawFrame extends JFrame
                 {
                     // Prompt the user for a color (use JColorChooser for this.)
                     // TODO
-                    
+                    	Color color = JColorChooser.showDialog(null, "Chose a color", Color.BLACK);
                     // If a valid color was chosen, assign it to color (the variable).
                     // TODO
-                    
+                    	controlPanel.color = color;
                     // Set the background of the button (colorChooser) to match the color chosen
                     // TODO
-                    
+                    	colorChooser.setBackground(color);
                     // If we're in edit mode, set the color of the chosen shape
                     // to that of the chosen color (You'll need to look at the code drawPanel provides)
                     // TODO
-                    
+                    	if (editFlag) {
+                    		int chosenShape = drawPanel.getShapeIndex();
+                    		drawPanel.getShapeList().get(chosenShape).setColor(color);
+                    		
+                    	}
+                    	drawPanel.repaint();
                     // Repaint the frame and panel. A bit more info is on page 5 of:
                     // https://web.stanford.edu/class/archive/cs/cs108/cs108.1092/handouts/27PaintRepaint.pdf
                     // TODO
